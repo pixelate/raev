@@ -17,11 +17,13 @@ Jeweler::Tasks.new do |gem|
   gem.name = "raev"
   gem.homepage = "http://github.com/pixelate/raev"
   gem.license = "MIT"
-  gem.summary = %Q{TODO: one-line summary of your gem}
-  gem.description = %Q{TODO: longer description of your gem}
-  gem.email = "updates@pixelate.de"
+  gem.summary = "Review parser"
+  gem.description = "Review parser for promoterapp.com"
+  gem.email = "andreas@madebypixelate.com"
   gem.authors = ["Andreas Zecher"]
+  
   # dependencies defined in Gemfile
+  gem.add_dependency 'nokogiri', '>= 1.4.4'
 end
 Jeweler::RubygemsDotOrgTasks.new
 
