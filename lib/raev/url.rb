@@ -27,7 +27,7 @@ module Raev
       begin
         RedirectFollower(@url, 3)
       rescue => ex
-        puts "Could not resolve #{url}. #{ex.class}: #{ex.message}"
+        puts "Could not resolve #{@url}. #{ex.class}: #{ex.message}"
         @url
       end
     end
