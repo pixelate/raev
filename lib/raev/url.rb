@@ -8,8 +8,10 @@ module Raev
       @url = url
     end
 
-    def base
-      @url.split('/')[2].gsub('www.', '')
+    def base      
+      base_url = @url.split('/')[2]  
+      base_url = base_url.gsub('www.', '') unless base_url.nil?
+      base_url
     end
     
     def clean
