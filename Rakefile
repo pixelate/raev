@@ -24,6 +24,7 @@ Jeweler::Tasks.new do |gem|
   
   # dependencies defined in Gemfile
   gem.add_dependency 'nokogiri', '>= 1.4.4'
+  gem.add_dependency 'redirect_follower', '>= 0.1.1'  
 end
 Jeweler::RubygemsDotOrgTasks.new
 
