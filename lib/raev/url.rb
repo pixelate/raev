@@ -15,27 +15,36 @@ module Raev
     end
     
     def clean
-      utm_index = @url.index(/(\?|&)utm_/)
-      unless(utm_index.nil?)
-        return url.slice(0, utm_index)
+      unless @url.nil?
+        utm_index = @url.index(/(\?|&)utm_/)
+        unless(utm_index.nil?)
+          return url.slice(0, utm_index)
+        end
       end
       
       @url
     end
     
     def resolved
-      begin
-        RedirectFollower(@url, 3)
-      rescue => ex
-        puts "Could not resolve #{@url}. #{ex.class}: #{ex.message}"
-        @url
+      unless @url.nil?
+        begin
+          return RedirectFollower(@url, 5)
+        rescue => ex
+          puts "Could not resolve #{@url}. #{ex.class}: #{ex.message}"
+        end
       end
+
+      @url
     end
     
     def resolved_and_clean
       resolved_url = Url.new(self.resolved)
       resolved_url.clean      
     end
+
+    def without_http
+      @url.sub("http://", "")
+    end    
   
   end
 
