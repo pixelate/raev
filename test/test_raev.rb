@@ -6,8 +6,6 @@ class TestRaev < Test::Unit::TestCase
   should "parse base url" do
     url = Raev::Url.new("http://indiegames.com/2011/05/c418_minecraft_volume_alpha.html")
     assert_equal url.base, "indiegames.com"
-
-    # TODO "indiegames.com/2011/05/c418_minecraft_volume_alpha.html"
   end
 
   should "clean url" do
