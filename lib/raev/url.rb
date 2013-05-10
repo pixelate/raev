@@ -44,8 +44,24 @@ module Raev
 
     def without_http
       @url.sub("http://", "")
-    end    
+    end
+    
+    def twitter
+      doc = Nokogiri::HTML(open(@url))
+      
+      node = doc.css('a:match_href("twitter.com")', Class.new {
+        def match_href list, expression
+          list.find_all { |node| node['href'] =~ /#{expression}/ }
+        end
+      }.new)
+      
+      if node.first
+        twitter_url = node.first["href"]
+        twitter_url.split('/').last
+      else
+        nil
+      end
+    end
   
   end
-
 end

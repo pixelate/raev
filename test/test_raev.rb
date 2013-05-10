@@ -1,5 +1,6 @@
-require 'helper'
+# encoding: UTF-8
 
+require 'helper'
 require 'raev/url'
 
 class TestRaev < Test::Unit::TestCase
@@ -27,5 +28,16 @@ class TestRaev < Test::Unit::TestCase
   should "resolve and clean url" do 
     url = Raev::Url.new("http://feedproxy.google.com/~r/fingergaming/~3/nBkNwBLq-U8/")
     assert_equal "http://www.gamasutra.com/topic/smartphone-tablet/fg/2011/01/21/zynga-acquires-drop7-developer-areacode/", url.resolved_and_clean    
+  end
+  
+  should "get twitter handle" do
+    url = Raev::Url.new("http://www.polygon.com")
+    assert_equal "polygon", url.twitter
+
+    url = Raev::Url.new("http://penny-arcade.com/report")
+    assert_equal "thepareport", url.twitter
+
+    url = Raev::Url.new("http://kotaku.com")
+    assert_equal nil, url.twitter
   end
 end
