@@ -48,13 +48,9 @@ module Raev
     
     def twitter
       doc = Nokogiri::HTML(open(@url))
-      
-      node = doc.css('a:match_href("twitter.com")', Class.new {
-        def match_href list, expression
-          list.find_all { |node| node['href'] =~ /#{expression}/ }
-        end
-      }.new)
-      
+
+      node = doc.css('a:match_href("twitter.com")', Raev::Parser.new)
+            
       if node.first
         twitter_url = node.first["href"]
         twitter_url.split('/').last
@@ -62,6 +58,25 @@ module Raev
         nil
       end
     end
-  
+    
+    def feed
+      feed_url = nil
+      
+      doc = Nokogiri::HTML(open(@url))
+            
+      node = doc.css('link[type="application/rss+xml"][rel="alternate"]')
+      
+      if node.first
+        feed_url = @url + node.first["href"]
+      else
+        node = doc.css('a:match_href("http://feeds")', Raev::Parser.new)
+                
+        if node.first
+          feed_url = node.first["href"]
+        end
+      end
+      
+      feed_url
+    end
   end
 end
