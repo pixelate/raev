@@ -3,8 +3,10 @@ module Raev
   class Url
   
     attr_reader :url
+    attr_reader :doc
   
     def initialize(url)
+      @doc = nil
       @url = url
     end
 
@@ -47,9 +49,7 @@ module Raev
     end
     
     def twitter
-      doc = Nokogiri::HTML(open(@url))
-
-      node = doc.css('a:match_href("twitter.com")', Raev::Parser.new)
+      node = document.css('a:match_href("twitter.com")', Raev::Parser.new)
             
       if node.first
         twitter_url = node.first["href"]
@@ -62,9 +62,7 @@ module Raev
     def feed
       feed_url = nil
       
-      doc = Nokogiri::HTML(open(@url))
-            
-      node = doc.css('link[type="application/rss+xml"][rel="alternate"]')
+      node = document.css('link[type="application/rss+xml"][rel="alternate"]')
       
       if node.first
         feed_url = @url + node.first["href"]
@@ -77,6 +75,16 @@ module Raev
       end
       
       feed_url
+    end
+    
+    private
+    
+    def document
+      if @doc.nil?
+        @doc = Nokogiri::HTML(open(@url))
+      else
+        @doc
+      end
     end
   end
 end

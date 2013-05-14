@@ -47,6 +47,11 @@ class TestRaev < Test::Unit::TestCase
     
     url = Raev::Url.new("http://penny-arcade.com/report")
     assert_equal "http://feeds.penny-arcade.com/pa-report", url.feed
-    
+  end
+  
+  should "get twitter and rss feed" do
+    url = Raev::Url.new("http://www.polygon.com")
+    assert_equal "http://www.polygon.com/rss/index.xml", url.feed
+    assert_equal "polygon", url.twitter    
   end
 end
