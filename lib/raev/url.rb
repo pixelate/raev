@@ -65,13 +65,17 @@ module Raev
       node = document.css('link[type="application/rss+xml"][rel="alternate"]')
       
       if node.first
-        feed_url = @url + node.first["href"]
+        feed_url = node.first["href"]
       else
-        node = doc.css('a:match_href("http://feeds")', Raev::Parser.new)
+        node = document.css('a:match_href("http://feeds.")', Raev::Parser.new)
                 
         if node.first
           feed_url = node.first["href"]
         end
+      end
+      
+      if feed_url && feed_url[0] == "/"
+        feed_url = @url + feed_url
       end
       
       feed_url
