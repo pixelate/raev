@@ -4,14 +4,14 @@
 # -*- encoding: utf-8 -*-
 
 Gem::Specification.new do |s|
-  s.name = "raev"
-  s.version = "0.1.7"
+  s.name = %q{raev}
+  s.version = "0.1.8"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Andreas Zecher"]
-  s.date = "2013-05-18"
-  s.description = "Review parser for promoterapp.com"
-  s.email = "andreas@madebypixelate.com"
+  s.date = %q{2013-05-31}
+  s.description = %q{Review parser for promoterapp.com}
+  s.email = %q{andreas@madebypixelate.com}
   s.extra_rdoc_files = [
     "LICENSE.txt",
     "README.rdoc"
@@ -25,22 +25,24 @@ Gem::Specification.new do |s|
     "Rakefile",
     "VERSION",
     "lib/raev.rb",
+    "lib/raev/author.rb",
     "lib/raev/parser.rb",
     "lib/raev/url.rb",
     "raev.gemspec",
     "test/helper.rb",
     "test/test_raev.rb"
   ]
-  s.homepage = "http://github.com/pixelate/raev"
+  s.homepage = %q{http://github.com/pixelate/raev}
   s.licenses = ["MIT"]
   s.require_paths = ["lib"]
-  s.rubygems_version = "1.8.23"
-  s.summary = "Review parser"
+  s.rubygems_version = %q{1.3.6}
+  s.summary = %q{Review parser}
 
   if s.respond_to? :specification_version then
+    current_version = Gem::Specification::CURRENT_SPECIFICATION_VERSION
     s.specification_version = 3
 
-    if Gem::Version.new(Gem::VERSION) >= Gem::Version.new('1.2.0') then
+    if Gem::Version.new(Gem::RubyGemsVersion) >= Gem::Version.new('1.2.0') then
       s.add_runtime_dependency(%q<nokogiri>, [">= 1.5.3"])
       s.add_runtime_dependency(%q<redirect_follower>, [">= 0.1.1"])
       s.add_development_dependency(%q<shoulda>, [">= 0"])
