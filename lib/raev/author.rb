@@ -13,7 +13,7 @@ module Raev
         end
         
         # Ignore common strings that are not names of people
-        no_authors = ["blogs", "editor", "staff"]
+        no_authors = ["admin", "blogs", "editor", "staff"]
         
         if no_authors.include?(author.downcase)
           return nil

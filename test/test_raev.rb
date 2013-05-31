@@ -67,6 +67,7 @@ class TestRaev < Test::Unit::TestCase
     assert_equal "Andreas Zecher", Raev::Author.parse_from_rss_entry("Andreas \"Pixelate\" Zecher")
     assert_equal "Andreas Zecher", Raev::Author.parse_from_rss_entry("Andreas 'Pixelate' Zecher")
     assert_equal "Andreas", Raev::Author.parse_from_rss_entry("andreas")
+    assert_equal nil, Raev::Author.parse_from_rss_entry("Admin")
     assert_equal nil, Raev::Author.parse_from_rss_entry("Blogs")
     assert_equal nil, Raev::Author.parse_from_rss_entry("Editor")
     assert_equal nil, Raev::Author.parse_from_rss_entry("Staff")
