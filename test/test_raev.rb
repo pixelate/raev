@@ -1,6 +1,7 @@
 # encoding: UTF-8
 
 require 'helper'
+require 'raev/author'
 require 'raev/url'
 
 class TestRaev < Test::Unit::TestCase
@@ -8,7 +9,7 @@ class TestRaev < Test::Unit::TestCase
     url = Raev::Url.new("http://indiegames.com/2011/05/c418_minecraft_volume_alpha.html")
     assert_equal url.base, "indiegames.com"
   end
-
+  
   should "clean url" do
     url = Raev::Url.new("http://ipodtouchlab.com/2011/01/iphone-ipad-app-sale-20110117.html?utm_campaign=touch_lab_bot&utm_medium=twitter&utm_source=am6_feedtweet")
     assert_equal "http://ipodtouchlab.com/2011/01/iphone-ipad-app-sale-20110117.html", url.clean
@@ -33,10 +34,10 @@ class TestRaev < Test::Unit::TestCase
   should "get twitter handle" do
     url = Raev::Url.new("http://www.polygon.com")
     assert_equal "polygon", url.twitter
-
+  
     url = Raev::Url.new("http://penny-arcade.com/report")
     assert_equal "thepareport", url.twitter
-
+  
     url = Raev::Url.new("http://kotaku.com")
     assert_equal nil, url.twitter
   end
@@ -47,10 +48,10 @@ class TestRaev < Test::Unit::TestCase
     
     url = Raev::Url.new("http://penny-arcade.com/report")
     assert_equal "http://feeds.penny-arcade.com/pa-report", url.feed
-
+  
     url = Raev::Url.new("http://arstechnica.com")
     assert_equal "http://feeds.arstechnica.com/arstechnica/index/", url.feed
-
+  
     url = Raev::Url.new("http://www.edge-online.com")
     assert_equal "http://www.edge-online.com/feed/", url.feed
   end
@@ -59,5 +60,9 @@ class TestRaev < Test::Unit::TestCase
     url = Raev::Url.new("http://www.polygon.com")
     assert_equal "http://www.polygon.com/rss/index.xml", url.feed
     assert_equal "polygon", url.twitter    
+  end
+  
+  should "parse author from rss entry" do
+    assert_equal "Andreas", Raev::Author.parse_from_rss_entry("andreas@promoterapp.com (Andreas)")
   end
 end
