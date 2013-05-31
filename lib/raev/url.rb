@@ -74,7 +74,7 @@ module Raev
         end
       end
       
-      if feed_url && feed_url[0] == "/"
+      if feed_url && feed_url[0,1] == "/"
         feed_url = @url + feed_url
       end
       
