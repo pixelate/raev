@@ -6,8 +6,13 @@ module Raev
       if entry_author.nil?
         return nil
       else
+        # Strip whitespace
         author = entry_author.strip
+        if author.empty?
+          return nil
+        end
         
+        # Ignore common strings that are not names of people
         no_authors = ["blogs", "editor", "staff"]
         
         if no_authors.include?(author.downcase)
@@ -15,16 +20,18 @@ module Raev
         end
       end
             
-      # andreas@promoterapp.com (Andreas)
+      # Parse notation "andreas@somedomain.com (Andreas)"
       m = /\((.*)\)/.match(author)
       unless m.nil?
         author = m[1]
       end
 
-      return author
+      # Remove nickname quotes
+      author = author.gsub(/\"(.*)\"/, "").gsub(/\'(.*)\'/, "").gsub("  ", " ")
+
+      # Capitalize
+      return author.split(' ').map(&:capitalize).join(' ')
     end
 
   end
 end
-
-# Remove quotes

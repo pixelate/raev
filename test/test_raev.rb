@@ -63,6 +63,14 @@ class TestRaev < Test::Unit::TestCase
   end
   
   should "parse author from rss entry" do
-    assert_equal "Andreas", Raev::Author.parse_from_rss_entry("andreas@promoterapp.com (Andreas)")
+    assert_equal "Andreas", Raev::Author.parse_from_rss_entry("andreas@somedomain.com (Andreas)")
+    assert_equal "Andreas Zecher", Raev::Author.parse_from_rss_entry("Andreas \"Pixelate\" Zecher")
+    assert_equal "Andreas Zecher", Raev::Author.parse_from_rss_entry("Andreas 'Pixelate' Zecher")
+    assert_equal "Andreas", Raev::Author.parse_from_rss_entry("andreas")
+    assert_equal nil, Raev::Author.parse_from_rss_entry("Blogs")
+    assert_equal nil, Raev::Author.parse_from_rss_entry("Editor")
+    assert_equal nil, Raev::Author.parse_from_rss_entry("Staff")
+    assert_equal nil, Raev::Author.parse_from_rss_entry(" ")
+    assert_equal nil, Raev::Author.parse_from_rss_entry(nil)
   end
 end
