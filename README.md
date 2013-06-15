@@ -51,7 +51,7 @@ Raev::Url.new("http://www.polygon.com").feed
 Normalize author name. Capitalizes name, strips whitespace, ignores email addresses and removes silly nicknames in quotes. Returns nil for empty strings or non-names like *Editor* or *Staff*.
 
 ```
-Raev::Author.normalize_name("andreas@somedomain.com (Andreas)"
+Raev::Author.normalize_name("andreas@somedomain.com (Andreas)")
 # => "Andreas"
 
 Raev::Author.normalize_name("andreas")
