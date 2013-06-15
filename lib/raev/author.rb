@@ -2,12 +2,12 @@ module Raev
   
   class Author  
 
-    def self.normalize_name entry_author
-      if entry_author.nil?
+    def self.normalize_name author_name
+      if author_name.nil?
         return nil
       else
         # Strip whitespace
-        author = entry_author.strip
+        author = author_name.strip
         if author.empty?
           return nil
         end
