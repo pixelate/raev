@@ -5,23 +5,23 @@
 
 Gem::Specification.new do |s|
   s.name = %q{raev}
-  s.version = "0.1.9"
+  s.version = "0.1.10"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Andreas Zecher"]
-  s.date = %q{2013-05-31}
-  s.description = %q{Review parser for promoterapp.com}
+  s.date = %q{2013-06-15}
+  s.description = %q{Fetch, parse and normalize meta data from websites.}
   s.email = %q{andreas@madebypixelate.com}
   s.extra_rdoc_files = [
     "LICENSE.txt",
-    "README.rdoc"
+    "README.md"
   ]
   s.files = [
     ".document",
     "Gemfile",
     "Gemfile.lock",
     "LICENSE.txt",
-    "README.rdoc",
+    "README.md",
     "Rakefile",
     "VERSION",
     "lib/raev.rb",
@@ -36,7 +36,7 @@ Gem::Specification.new do |s|
   s.licenses = ["MIT"]
   s.require_paths = ["lib"]
   s.rubygems_version = %q{1.3.6}
-  s.summary = %q{Review parser}
+  s.summary = %q{Fetch, parse and normalize meta data from websites.}
 
   if s.respond_to? :specification_version then
     current_version = Gem::Specification::CURRENT_SPECIFICATION_VERSION
