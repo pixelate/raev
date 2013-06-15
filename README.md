@@ -3,6 +3,19 @@ Raev
 
 Raev is a Ruby gem for fetching, parsing and normalizing meta data from websites. It was extracted from http://promoterapp.com.
 
+Install
+--------
+
+```shell
+gem install raev
+```
+or add the following line to Gemfile:
+
+```ruby
+gem 'raev'
+```
+and run `bundle install` from your shell.
+
 Usage
 -----
 
