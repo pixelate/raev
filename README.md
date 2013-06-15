@@ -6,7 +6,7 @@ Raev is a Ruby gem for fetching, parsing and normalizing meta data from websites
 Usage
 -----
 
-Get the domain name from an url without the *www.* subdomain.
+Get the domain name from an url without the `www.` subdomain.
 
 ```ruby
 Raev::Url.new("http://indiegames.com/2011/05/c418_minecraft_volume_alpha.html").base
@@ -20,7 +20,7 @@ Raev::Url.new("http://ipodtouchlab.com/2011/01/iphone-ipad-app-sale-20110117.htm
 # =>  "http://ipodtouchlab.com/2011/01/iphone-ipad-app-sale-20110117.html"
 ```
 
-Resolve a shortend or proxied url.
+Resolve a shortened or proxied url.
 
 ```ruby
 Raev::Url.new("http://sbn.to/WRgXfl").resolved
@@ -50,6 +50,7 @@ Raev::Url.new("http://www.polygon.com").feed
 
 Normalize author name. Capitalizes name, strips whitespace, ignores email addresses and removes silly nicknames in quotes. Returns nil for empty strings or non-names like *Editor* or *Staff*.
 
+```
 Raev::Author.normalize_name("andreas@somedomain.com (Andreas)"
 # => "Andreas"
 
@@ -64,3 +65,4 @@ Raev::Author.normalize_name("Editor")
 
 Raev::Author.normalize_name(" ")
 # => nil
+```
