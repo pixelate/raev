@@ -17,8 +17,8 @@ Jeweler::Tasks.new do |gem|
   gem.name = "raev"
   gem.homepage = "http://github.com/pixelate/raev"
   gem.license = "MIT"
-  gem.summary = "Review parser"
-  gem.description = "Review parser for promoterapp.com"
+  gem.summary = "Fetch, parse and normalize meta data from websites."
+  gem.description = "Fetch, parse and normalize meta data from websites."
   gem.email = "andreas@madebypixelate.com"
   gem.authors = ["Andreas Zecher"]
   
