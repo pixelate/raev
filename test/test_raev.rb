@@ -63,15 +63,15 @@ class TestRaev < Test::Unit::TestCase
   end
   
   should "parse author from rss entry" do
-    assert_equal "Andreas", Raev::Author.parse_from_rss_entry("andreas@somedomain.com (Andreas)")
-    assert_equal "Andreas Zecher", Raev::Author.parse_from_rss_entry("Andreas \"Pixelate\" Zecher")
-    assert_equal "Andreas Zecher", Raev::Author.parse_from_rss_entry("Andreas 'Pixelate' Zecher")
-    assert_equal "Andreas", Raev::Author.parse_from_rss_entry("andreas")
-    assert_equal nil, Raev::Author.parse_from_rss_entry("Admin")
-    assert_equal nil, Raev::Author.parse_from_rss_entry("Blogs")
-    assert_equal nil, Raev::Author.parse_from_rss_entry("Editor")
-    assert_equal nil, Raev::Author.parse_from_rss_entry("Staff")
-    assert_equal nil, Raev::Author.parse_from_rss_entry(" ")
-    assert_equal nil, Raev::Author.parse_from_rss_entry(nil)
+    assert_equal "Andreas", Raev::Author.normalize_name("andreas@somedomain.com (Andreas)")
+    assert_equal "Andreas Zecher", Raev::Author.normalize_name("Andreas \"Pixelate\" Zecher")
+    assert_equal "Andreas Zecher", Raev::Author.normalize_name("Andreas 'Pixelate' Zecher")
+    assert_equal "Andreas", Raev::Author.normalize_name("andreas")
+    assert_equal nil, Raev::Author.normalize_name("Admin")
+    assert_equal nil, Raev::Author.normalize_name("Blogs")
+    assert_equal nil, Raev::Author.normalize_name("Editor")
+    assert_equal nil, Raev::Author.normalize_name("Staff")
+    assert_equal nil, Raev::Author.normalize_name(" ")
+    assert_equal nil, Raev::Author.normalize_name(nil)
   end
 end
