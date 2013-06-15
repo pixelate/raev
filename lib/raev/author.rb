@@ -2,7 +2,7 @@ module Raev
   
   class Author  
 
-    def self.parse_from_rss_entry entry_author
+    def self.normalize_name entry_author
       if entry_author.nil?
         return nil
       else
