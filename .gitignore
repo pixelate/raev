@@ -48,3 +48,5 @@ pkg
 #*.rbc
 
 .ruby-version
+
+.DS_Store
