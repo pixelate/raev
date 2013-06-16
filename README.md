@@ -61,6 +61,13 @@ Raev.url("http://www.polygon.com").feed
 # => "http://www.polygon.com/rss/index.xml"
 ```
 
+Fetch headline from url. Removes double spaces.
+
+```ruby
+Raev.url("http://www.polygon.com/e3-2013/2013/6/14/4429126/the-indie-eight-ps4").headline
+# => "The Indie Eight: Polygon talks with the showcase indies launching on PS4"
+```
+
 Normalize author name. Capitalizes name, strips whitespace, ignores email addresses and removes silly nicknames in quotes. Returns nil for empty strings or non-names like *Editor* or *Staff*.
 
 ```
