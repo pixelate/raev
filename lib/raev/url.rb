@@ -81,6 +81,40 @@ module Raev
       feed_url
     end
     
+    def headline
+      page_title = nil
+      
+      node = document.css(".twitter-share-button")
+      
+      if node.first
+        if node.first['data-text']
+          page_title = node.first['data-text']
+        end
+      end
+
+      if page_title.nil?
+        document.css("head meta").each do |meta|
+          if meta['property'] == 'og:title' || meta['property'] == 'twitter:title'
+            page_title = meta['content']
+          end
+        end
+      end
+            
+      if page_title.nil?
+        node = document.css("#article h1, a[rel=\"bookmark\"], h2[itemprop=\"name\"]")
+                
+        if node.first
+          page_title = node.first.content
+        end
+      end
+      
+      unless page_title.nil?
+        page_title.gsub!(/ +/, ' ')
+      end
+      
+      page_title
+    end
+    
     private
     
     def document
