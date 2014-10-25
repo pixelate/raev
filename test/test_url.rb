@@ -3,7 +3,7 @@
 require 'helper'
 require 'raev'
 
-class TestRaev < Test::Unit::TestCase
+class UrlTest < Test::Unit::TestCase
   should "parse base url" do
     url = Raev.url("http://indiegames.com/2011/05/c418_minecraft_volume_alpha.html")
     assert_equal url.base, "indiegames.com"
@@ -74,17 +74,4 @@ class TestRaev < Test::Unit::TestCase
     url = Raev.url("http://www.rockpapershotgun.com/2013/06/05/i-spy-an-open-beta-for-spy-party/")
     assert_equal "I Spy An Open Beta For Spy Party", url.headline
   end
-    
-  should "parse author from rss entry" do
-    assert_equal "Andreas", Raev.normalize_author("andreas@somedomain.com (Andreas)")
-    assert_equal "Andreas Zecher", Raev.normalize_author("Andreas \"Pixelate\" Zecher")
-    assert_equal "Andreas Zecher", Raev.normalize_author("Andreas 'Pixelate' Zecher")
-    assert_equal "Andreas", Raev.normalize_author("andreas")
-    assert_equal nil, Raev.normalize_author("Admin")
-    assert_equal nil, Raev.normalize_author("Blogs")
-    assert_equal nil, Raev.normalize_author("Editor")
-    assert_equal nil, Raev.normalize_author("Staff")
-    assert_equal nil, Raev.normalize_author(" ")
-    assert_equal nil, Raev.normalize_author(nil)
-  end  
 end
