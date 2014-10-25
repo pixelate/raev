@@ -86,3 +86,5 @@ Raev.normalize_author("Editor")
 Raev.normalize_author(" ")
 # => nil
 ```
+
+[![Code Climate](https://codeclimate.com/github/pixelate/raev/badges/gpa.svg)](https://codeclimate.com/github/pixelate/raev)
