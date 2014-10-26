@@ -17,6 +17,6 @@ class TestArticle < Test::Unit::TestCase
     
     article = Raev.article(body)
     
-    assert_equal "<p>Some text.<br>Some more text.   <br></p>", article.body
+    assert_equal "<p>Some text.<br>Some more text.   </p>", article.body
   end
 end

@@ -40,13 +40,15 @@ module Raev
           if next_node.matches?("br") || node_empty?(next_node)
             node.remove
           end
+        else
+          node.remove
         end
       end
 
       doc
     end
 
-    def node_empty? node
+    def node_empty?(node)
       node.element_children.empty? && /\A *\z/.match(node.inner_text)
     end
 
