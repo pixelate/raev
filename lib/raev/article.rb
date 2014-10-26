@@ -24,7 +24,7 @@ module Raev
     
     def remove_empty_paragraphs(doc)
       doc.css("p").each do |node|
-        if node.element_children.empty? && /\A *\z/.match(node.inner_text)
+        if node_empty?(node)
           node.remove
         end
       end
@@ -37,7 +37,7 @@ module Raev
         next_node = node.next
         
         if next_node
-          if next_node.matches?("br") || (next_node.element_children.empty? && /\A *\z/.match(next_node.inner_text))
+          if next_node.matches?("br") || node_empty?(next_node)
             node.remove
           end
         end
@@ -46,7 +46,9 @@ module Raev
       doc
     end
 
-    # TODO node empty?
+    def node_empty? node
+      node.element_children.empty? && /\A *\z/.match(node.inner_text)
+    end
 
   end
 
