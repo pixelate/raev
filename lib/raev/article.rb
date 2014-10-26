@@ -10,16 +10,27 @@ module Raev
       
       @doc = Nokogiri::HTML::DocumentFragment.parse(body)
       
+      @doc = replace_divs_with_paragraphs(@doc)
       @doc = remove_empty_paragraphs(@doc)
       @doc = remove_extra_linebreaks(@doc)
 
-      @body = @doc.to_s
+      @body = @doc.to_s.gsub("\n", "")
     end
 
     private
     
     def replace_non_breaking_space(str)
       str.gsub("&nbsp;", " ")
+    end
+    
+    def replace_divs_with_paragraphs(doc)
+      doc.css("div").each do |node|
+        if node.css("p").length == 0        
+          node.name = "p"
+        end
+      end
+      
+      doc
     end
     
     def remove_empty_paragraphs(doc)

@@ -19,4 +19,20 @@ class TestArticle < Test::Unit::TestCase
     
     assert_equal "<p>Some text.<br>Some more text.   </p>", article.body
   end
+  
+  should "transform div to p tags" do
+    body = "<div>Some paragraph.</div><div>Another paragraph.</div>"
+    
+    article = Raev.article(body)
+    
+    assert_equal "<p>Some paragraph.</p><p>Another paragraph.</p>", article.body
+  end
+  
+  should "not transform div to p tags if they have p children" do
+    body = "<div><p>Some paragraph.</p><p>Another paragraph.</p></div>"
+    
+    article = Raev.article(body)
+    
+    assert_equal "<div><p>Some paragraph.</p><p>Another paragraph.</p></div>", article.body
+  end
 end
