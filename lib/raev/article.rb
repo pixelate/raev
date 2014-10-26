@@ -11,6 +11,7 @@ module Raev
       @doc = Nokogiri::HTML::DocumentFragment.parse(body)
       
       @doc = remove_empty_paragraphs(@doc)
+      @doc = remove_extra_linebreaks(@doc)
 
       @body = @doc.to_s
     end
@@ -30,6 +31,22 @@ module Raev
       
       doc
     end
+    
+    def remove_extra_linebreaks(doc)
+      doc.css("br").each do |node|
+        next_node = node.next
+        
+        if next_node
+          if next_node.matches?("br") || (next_node.element_children.empty? && /\A *\z/.match(next_node.inner_text))
+            node.remove
+          end
+        end
+      end
+
+      doc
+    end
+
+    # TODO node empty?
 
   end
 

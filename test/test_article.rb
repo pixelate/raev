@@ -11,4 +11,12 @@ class TestArticle < Test::Unit::TestCase
     
     assert_equal "<p>This paragraph has content.</p><p><img></p>", article.body
   end
+  
+  should "remove extra linebreaks" do
+    body = "<p>Some text.<br><br><br/>Some more text.<br>&nbsp;&nbsp; <br></p>"
+    
+    article = Raev.article(body)
+    
+    assert_equal "<p>Some text.<br>Some more text.   <br></p>", article.body
+  end
 end
