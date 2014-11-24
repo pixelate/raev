@@ -51,7 +51,6 @@ Gem::Specification.new do |s|
       s.add_development_dependency(%q<bundler>, ["~> 1.6.3"])
       s.add_development_dependency(%q<jeweler>, ["~> 1.6.4"])
       s.add_development_dependency(%q<test-unit>, ["~> 2.5.4"])
-      s.add_runtime_dependency(%q<nokogiri>, [">= 1.4.4"])
       s.add_runtime_dependency(%q<redirect_follower>, [">= 0.1.1"])
     else
       s.add_dependency(%q<nokogiri>, [">= 1.6.1"])
@@ -60,7 +59,6 @@ Gem::Specification.new do |s|
       s.add_dependency(%q<bundler>, ["~> 1.6.3"])
       s.add_dependency(%q<jeweler>, ["~> 1.6.4"])
       s.add_dependency(%q<test-unit>, ["~> 2.5.4"])
-      s.add_dependency(%q<nokogiri>, [">= 1.4.4"])
       s.add_dependency(%q<redirect_follower>, [">= 0.1.1"])
     end
   else
@@ -70,7 +68,6 @@ Gem::Specification.new do |s|
     s.add_dependency(%q<bundler>, ["~> 1.6.3"])
     s.add_dependency(%q<jeweler>, ["~> 1.6.4"])
     s.add_dependency(%q<test-unit>, ["~> 2.5.4"])
-    s.add_dependency(%q<nokogiri>, [">= 1.4.4"])
     s.add_dependency(%q<redirect_follower>, [">= 0.1.1"])
   end
 end
