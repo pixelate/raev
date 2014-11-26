@@ -31,7 +31,7 @@ class UrlTest < Test::Unit::TestCase
   end
   
   should "get twitter handle" do
-    url = Raev.url("http://kotaku.com")
+    url = Raev.url("http://polygon.com")
     assert_equal nil, url.twitter
   end
   
