@@ -42,8 +42,8 @@ class UrlTest < Test::Unit::TestCase
     url = Raev.url("http://arstechnica.com")
     assert_equal "http://feeds.arstechnica.com/arstechnica/index/", url.feed
   
-    url = Raev.url("http://www.edge-online.com")
-    assert_equal "http://www.edge-online.com/feed/", url.feed
+    url = Raev.url("http://www.kotaku.com")
+    assert_equal "http://feeds.gawker.com/kotaku/full", url.feed
   end
   
   should "get headline from url" do
@@ -58,9 +58,6 @@ class UrlTest < Test::Unit::TestCase
 
     url = Raev.url("http://www.creativeapplications.net/games/below-new-from-the-creators-of-sword-sworcery/")
     assert_equal "Below – New from the creators of Sword & Sworcery", url.headline
-
-    url = Raev.url("http://www.edge-online.com/news/e3-2013-watch-the-first-hohokum-gameplay-footage-here/")
-    assert_equal "E3 2013: watch the first Hohokum gameplay footage here", url.headline
 
     url = Raev.url("http://www.giantbomb.com/videos/e3-2013-fez-ii-announcement-teaser/2300-7606/")
     assert_equal "E3 2013: Fez II Announcement Teaser", url.headline
