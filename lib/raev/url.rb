@@ -1,13 +1,17 @@
+require "json"
+require "sanitize"
+
 module Raev
   
   class Url
-  
     attr_reader :url
     attr_reader :doc
+    attr_reader :linked_data
   
     def initialize(url)
-      @doc = nil
       @url = url
+      @doc = nil
+      @linked_data = nil
     end
 
     def base      
@@ -82,6 +86,10 @@ module Raev
     end
     
     def headline
+      if linked_data && linked_data["headline"]
+        return Sanitize.clean(linked_data["headline"])
+      end
+      
       page_title = nil
       
       node = document.css(".twitter-share-button")
@@ -114,15 +122,28 @@ module Raev
       
       page_title
     end
-    
+        
     private
     
     def document
       if @doc.nil?
         @doc = Nokogiri::HTML(open(@url))
-      else
-        @doc
       end
+
+      @doc
     end
+    
+    def linked_data
+      if @linked_data.nil?
+        node = document.css("script[type=\"application/ld+json\"]")
+      
+        if node.first
+          @linked_data = JSON.parse(node.first.content)
+        end
+      end
+      
+      @linked_data
+    end
+    
   end
 end

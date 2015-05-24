@@ -70,5 +70,5 @@ class UrlTest < Test::Unit::TestCase
 
     url = Raev.url("http://www.rockpapershotgun.com/2013/06/05/i-spy-an-open-beta-for-spy-party/")
     assert_equal "I Spy An Open Beta For Spy Party", url.headline
-  end
+  end  
 end
