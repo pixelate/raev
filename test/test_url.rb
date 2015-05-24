@@ -70,5 +70,29 @@ class UrlTest < Test::Unit::TestCase
 
     url = Raev.url("http://www.rockpapershotgun.com/2013/06/05/i-spy-an-open-beta-for-spy-party/")
     assert_equal "I Spy An Open Beta For Spy Party", url.headline
-  end  
+  end
+  
+  should "get pubdate from url" do
+    url = Raev.url("http://www.polygon.com/2015/5/18/8620223/witcher-3-guide-witcher-2-witcher")
+    assert_equal_date Date.new(2015, 5, 18), url.pubdate
+    
+    url = Raev.url("http://kotaku.com/this-week-destiny-got-a-hell-of-a-lot-better-1706391634")
+    assert_equal_date Date.new(2015, 5, 23), url.pubdate
+    
+    url = Raev.url("http://www.rockpapershotgun.com/2014/07/03/beauty-beheld-future-unfolding/")
+    assert_equal_date Date.new(2014, 7, 3), url.pubdate
+    
+    url = Raev.url("http://jayisgames.com/review/the-black-forest-finding-friends.php")
+    assert_equal_date Date.new(2009, 12, 9), url.pubdate
+    
+    url = Raev.url("http://boingboing.net/2007/03/21/understanding-games.html")
+    assert_equal_date Date.new(2007, 3, 21), url.pubdate
+  end
+  
+  private
+  
+  def assert_equal_date dateA, dateB
+    assert_equal dateA.strftime('%Y-%m-%d'), dateB.strftime('%Y-%m-%d')
+  end
+  
 end
