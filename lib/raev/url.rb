@@ -124,27 +124,30 @@ module Raev
       page_title
     end
         
-    def pubdate
-      # TODO wired.com
-      
+    def pubdate      
       if linked_data && linked_data["datePublished"]
         return Date.parse(linked_data["datePublished"])
       end
       
       date_elements = @url.match(/[0-9]{4}\/[0-9]{1,2}\/[0-9]{1,2}/).to_s.split("/")
+      
       if date_elements.size == 3
-        Date.new(date_elements[0].to_i, date_elements[1].to_i, date_elements[2].to_i)      
+        return Date.new(date_elements[0].to_i, date_elements[1].to_i, date_elements[2].to_i)      
       else
-        node = document.search(".entryDate, .entrydate").first
+        node = document.search("meta[itemprop='datePublished']").first
+        
+        if node
+          return Date.parse(node.attribute("content"))
+        else
+          node = document.search(".entryDate, .entrydate").first
 
-        date = nil
-
-        unless node.nil?
-          date = Chronic.parse(node.content.gsub(/[^a-zA-Z0-9\s]/,"").strip)
+          if node
+            return Chronic.parse(node.content.gsub(/[^a-zA-Z0-9\s]/,"").strip)
+          end
         end
-
-        date
       end
+      
+      nil
     end
         
     private

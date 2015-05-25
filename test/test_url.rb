@@ -87,6 +87,9 @@ class UrlTest < Test::Unit::TestCase
     
     url = Raev.url("http://boingboing.net/2007/03/21/understanding-games.html")
     assert_equal_date Date.new(2007, 3, 21), url.pubdate
+    
+    url = Raev.url("http://www.wired.com/2014/09/upcoming-a-gorgeous-adventure-game-that-mutates-for-each-player/")
+    assert_equal_date Date.new(2014, 9, 4), url.pubdate
   end
   
   private
