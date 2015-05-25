@@ -134,7 +134,7 @@ module Raev
       if date_elements.size == 3
         return Date.new(date_elements[0].to_i, date_elements[1].to_i, date_elements[2].to_i)      
       else
-        node = document.search("meta[itemprop='datePublished']").first
+        node = document.search("meta[itemprop='datePublished'], meta[name='pub_date']").first
         
         if node
           return Date.parse(node.attribute("content"))
@@ -148,6 +148,36 @@ module Raev
       end
       
       nil
+    end
+    
+    def author
+      cssSelectors = [
+        '.author-info .name',
+        '.author-top a',
+        '.yt-user-name',
+        'a[rel~="author"]',
+        'a[itemprop~="author"]',
+        '.author h3 a',
+        '.author',
+        '.posted-by a',
+        '.entryAuthor a',
+        'a.names',
+        'a.byline-author',
+        '.byline a',
+        '.author.vcard a',
+        'p.info a',
+        '.author-name',
+        '.upcased',
+        'a[rel~="nofollow"]'
+      ]
+
+      node = document.search(cssSelectors.join(", ")).first
+      
+      if node
+        Sanitize.clean(node.content)
+      else
+        ""
+      end
     end
         
     private

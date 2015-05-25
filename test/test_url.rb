@@ -90,6 +90,29 @@ class UrlTest < Test::Unit::TestCase
     
     url = Raev.url("http://www.wired.com/2014/09/upcoming-a-gorgeous-adventure-game-that-mutates-for-each-player/")
     assert_equal_date Date.new(2014, 9, 4), url.pubdate
+    
+    url = Raev.url("http://www.pcgamer.com/harebrained-schemes-hints-at-something-new-from-an-old-franchise/")
+    assert_equal_date Date.new(2015, 5, 21), url.pubdate    
+  end
+  
+  should "get author from url" do
+    url = Raev.url("http://www.rockpapershotgun.com/2014/07/03/beauty-beheld-future-unfolding/")
+    assert_equal "Adam Smith", url.author
+    
+    url = Raev.url("http://www.polygon.com/features/2013/3/25/4128022/gdc-gathering-of-game-makers")
+    assert_equal "Colin Campbell", url.author
+    
+    url = Raev.url("http://kotaku.com/worth-reading-some-kickstarters-are-lying-about-game-b-1706340013")
+    assert_equal "Patrick Klepek", url.author
+    
+    url = Raev.url("http://killscreendaily.com/articles/future-unfolding-wonder/")
+    assert_equal "Jess Joho", url.author
+    
+    url = Raev.url("http://www.creativeapplications.net/games/future-unfolding-procedurally-generated-world-both-beautiful-and-dangerous/")
+    assert_equal "Filip Visnjic", url.author
+
+    url = Raev.url("http://www.pcgamer.com/harebrained-schemes-hints-at-something-new-from-an-old-franchise/")
+    assert_equal "Andy Chalk", url.author
   end
   
   private
