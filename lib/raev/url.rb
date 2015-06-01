@@ -174,10 +174,14 @@ module Raev
       node = document.search(cssSelectors.join(", ")).first
       
       if node
-        Sanitize.clean(node.content)
-      else
-        ""
+        words = node.content.split.size
+      
+        if words <= 4
+          return Sanitize.clean(node.content).strip[0..255]
+        end
       end
+      
+      ""
     end
         
     private
