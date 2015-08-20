@@ -21,10 +21,6 @@ Jeweler::Tasks.new do |gem|
   gem.description = "Fetch, parse and normalize meta data from websites."
   gem.email = "andreas@madebypixelate.com"
   gem.authors = ["Andreas Zecher"]
-  
-  # dependencies defined in Gemfile
-  gem.add_dependency 'nokogiri', '>= 1.4.4'
-  gem.add_dependency 'redirect_follower', '>= 0.1.1'  
 end
 Jeweler::RubygemsDotOrgTasks.new
 
