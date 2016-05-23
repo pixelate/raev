@@ -154,7 +154,7 @@ module Raev
       cssSelectors = [
         '.author-info .name',
         '.author-top a',
-        '.yt-user-name',
+				'.yt-user-info a',
         'a[rel~="author"]',
         'a[itemprop~="author"]',
         '.author h3 a',

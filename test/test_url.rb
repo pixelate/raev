@@ -110,6 +110,9 @@ class UrlTest < Test::Unit::TestCase
     
     url = Raev.url("http://www.creativeapplications.net/games/future-unfolding-procedurally-generated-world-both-beautiful-and-dangerous/")
     assert_equal "Filip Visnjic", Raev::normalize_author(url.author)
+		
+		url = Raev.url("https://www.youtube.com/watch?v=FmZYPMsq5m4")
+		assert_equal "PsiSyndicate", url.author
   end
   
   private
