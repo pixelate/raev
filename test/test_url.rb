@@ -114,6 +114,20 @@ class UrlTest < Test::Unit::TestCase
 		url = Raev.url("https://www.youtube.com/watch?v=FmZYPMsq5m4")
 		assert_equal "PsiSyndicate", url.author
   end
+	
+	should "get score" do
+		url = Raev.url("http://www.slantmagazine.com/games/review/shadow-of-the-beast")
+		assert_equal 4.0, url.ratingValue
+		assert_equal 5, url.bestRating
+		
+		url = Raev.url("http://www.gamesradar.com/superhot-review/")
+		assert_equal 4.5, url.ratingValue
+		assert_equal 5, url.bestRating
+		
+		url = Raev.url("http://www.gameswelt.de/shadow-of-the-beast/test/klassiker-im-neuen-gewand,257932")
+		assert_equal 8, url.ratingValue
+		assert_equal 10, url.bestRating
+	end
   
   private
   

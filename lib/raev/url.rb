@@ -183,6 +183,40 @@ module Raev
       
       ""
     end
+		
+		def ratingValue
+			node = document.search('*[itemprop="ratingValue"]').first
+			
+			if node
+				if node.attribute("content")
+					value = node.attribute("content").value
+				else
+					value = node.content
+				end
+			end
+
+			if value
+				value.to_f
+			else
+				nil
+			end
+		end
+		
+		def bestRating
+			node = document.search('*[itemprop="bestRating"]').first
+			
+			if node
+				if node.attribute("content")
+					value = node.attribute("content").value
+				
+					if value
+						return value.to_f
+					end
+				end
+			end
+			
+			nil			
+		end
         
     private
     
