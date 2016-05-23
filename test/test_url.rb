@@ -65,10 +65,10 @@ class UrlTest < Test::Unit::TestCase
     url = Raev.url("http://indiegames.com/2013/06/indie_fund_backing_for_two_new.html")
     assert_equal "Indie Fund backing two new titles for Double Fine", url.headline
 
-    url = Raev.url("http://killscreendaily.com/articles/news/cheat-sheet-614/")
+    url = Raev.url("https://killscreendaily.com/articles/news/cheat-sheet-614/")
     assert_equal "Pixels on canvas, Spielberg's predictions, and Polytron's glorious tease", url.headline
 
-    url = Raev.url("http://www.rockpapershotgun.com/2013/06/05/i-spy-an-open-beta-for-spy-party/")
+    url = Raev.url("https://www.rockpapershotgun.com/2013/06/05/i-spy-an-open-beta-for-spy-party/")
     assert_equal "I Spy An Open Beta For Spy Party", url.headline
   end
   
@@ -79,7 +79,7 @@ class UrlTest < Test::Unit::TestCase
     url = Raev.url("http://kotaku.com/this-week-destiny-got-a-hell-of-a-lot-better-1706391634")
     assert_equal_date Date.new(2015, 5, 23), url.pubdate
     
-    url = Raev.url("http://www.rockpapershotgun.com/2014/07/03/beauty-beheld-future-unfolding/")
+    url = Raev.url("https://www.rockpapershotgun.com/2014/07/03/beauty-beheld-future-unfolding/")
     assert_equal_date Date.new(2014, 7, 3), url.pubdate
     
     url = Raev.url("http://jayisgames.com/review/the-black-forest-finding-friends.php")
@@ -96,7 +96,7 @@ class UrlTest < Test::Unit::TestCase
   end
   
   should "get author from url" do
-    url = Raev.url("http://www.rockpapershotgun.com/2014/07/03/beauty-beheld-future-unfolding/")
+    url = Raev.url("https://www.rockpapershotgun.com/2014/07/03/beauty-beheld-future-unfolding/")
     assert_equal "Adam Smith", url.author
     
     url = Raev.url("http://www.polygon.com/features/2013/3/25/4128022/gdc-gathering-of-game-makers")
@@ -105,7 +105,7 @@ class UrlTest < Test::Unit::TestCase
     url = Raev.url("http://kotaku.com/worth-reading-some-kickstarters-are-lying-about-game-b-1706340013")
     assert_equal "Patrick Klepek", url.author
     
-    url = Raev.url("http://killscreendaily.com/articles/future-unfolding-wonder/")
+    url = Raev.url("https://killscreendaily.com/articles/future-unfolding-wonder/")
     assert_equal "Jess Joho", url.author
     
     url = Raev.url("http://www.creativeapplications.net/games/future-unfolding-procedurally-generated-world-both-beautiful-and-dangerous/")
