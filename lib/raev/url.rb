@@ -151,6 +151,12 @@ module Raev
     end
     
     def author
+			node = document.search('meta[name="author"]').first
+
+			if node && node.attribute("content")
+				return node.attribute("content").value
+			end
+			
       cssSelectors = [
         '.author-info .name',
         '.author-top a',
@@ -217,7 +223,7 @@ module Raev
 			
 			nil			
 		end
-        
+		
     private
     
     def document
