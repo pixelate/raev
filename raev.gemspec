@@ -53,7 +53,7 @@ Gem::Specification.new do |s|
       s.add_runtime_dependency(%q<chronic>, [">= 0.9.1"])
       s.add_development_dependency(%q<shoulda>, [">= 0"])
       s.add_development_dependency(%q<bundler>, ["~> 1.12.3"])
-      s.add_development_dependency(%q<jeweler>, ["= 2.0.1"])
+      s.add_development_dependency(%q<jeweler>, ["= 2.1.1"])
       s.add_development_dependency(%q<test-unit>, ["~> 2.5.4"])
     else
       s.add_dependency(%q<json>, [">= 1.8.3"])
@@ -63,7 +63,7 @@ Gem::Specification.new do |s|
       s.add_dependency(%q<chronic>, [">= 0.9.1"])
       s.add_dependency(%q<shoulda>, [">= 0"])
       s.add_dependency(%q<bundler>, ["~> 1.12.3"])
-      s.add_dependency(%q<jeweler>, ["= 2.0.1"])
+      s.add_dependency(%q<jeweler>, ["= 2.1.1"])
       s.add_dependency(%q<test-unit>, ["~> 2.5.4"])
     end
   else
@@ -74,7 +74,7 @@ Gem::Specification.new do |s|
     s.add_dependency(%q<chronic>, [">= 0.9.1"])
     s.add_dependency(%q<shoulda>, [">= 0"])
     s.add_dependency(%q<bundler>, ["~> 1.12.3"])
-    s.add_dependency(%q<jeweler>, ["= 2.0.1"])
+    s.add_dependency(%q<jeweler>, ["= 2.1.1"])
     s.add_dependency(%q<test-unit>, ["~> 2.5.4"])
   end
 end
