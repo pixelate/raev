@@ -223,9 +223,7 @@ module Raev
 			
 			nil			
 		end
-		
-    private
-    
+
     def document
       if @doc.nil?
         @doc = Nokogiri::HTML(open(@url))
@@ -233,6 +231,8 @@ module Raev
 
       @doc
     end
+		
+    private
     
     def linked_data
       if @linked_data.nil?
