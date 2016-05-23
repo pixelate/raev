@@ -66,7 +66,7 @@ class UrlTest < Test::Unit::TestCase
     assert_equal "Indie Fund backing two new titles for Double Fine", url.headline
 
     url = Raev.url("https://killscreendaily.com/articles/news/cheat-sheet-614/")
-    assert_equal "Pixels on canvas, Spielberg's predictions, and Polytron's glorious tease", url.headline
+    assert_equal "Pixels on canvas, Spielberg's predictions, and Polytron's glorious tease - Kill Screen", url.headline
 
     url = Raev.url("https://www.rockpapershotgun.com/2013/06/05/i-spy-an-open-beta-for-spy-party/")
     assert_equal "I Spy An Open Beta For Spy Party", url.headline
@@ -109,7 +109,7 @@ class UrlTest < Test::Unit::TestCase
     assert_equal "Jess Joho", url.author
     
     url = Raev.url("http://www.creativeapplications.net/games/future-unfolding-procedurally-generated-world-both-beautiful-and-dangerous/")
-    assert_equal "Filip Visnjic", url.author
+    assert_equal "Filip Visnjic", Raev::normalize_author(url.author)
   end
   
   private

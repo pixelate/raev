@@ -29,6 +29,9 @@ module Raev
       # Remove nickname quotes
       author = author.gsub(/\"(.*)\"/, "").gsub(/\'(.*)\'/, "").gsub("  ", " ")
 
+			# Remove "by"
+			author = author.gsub("by ", "")
+
       # Capitalize
       return author.split(' ').map(&:capitalize).join(' ')
     end
