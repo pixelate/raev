@@ -68,6 +68,16 @@ Raev.url("http://www.polygon.com/e3-2013/2013/6/14/4429126/the-indie-eight-ps4")
 # => "The Indie Eight: Polygon talks with the showcase indies launching on PS4"
 ```
 
+Parse review scores.
+
+```ruby
+review = Raev.url("http://www.gamesradar.com/superhot-review/")
+review.ratingValue
+# => 4.5
+review.review.bestRating
+# => 5.0
+```
+
 Normalize author name. Capitalizes name, strips whitespace, ignores email addresses and removes silly nicknames in quotes. Returns nil for empty strings or non-names like *Editor* or *Staff*.
 
 ```
