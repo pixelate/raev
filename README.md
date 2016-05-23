@@ -74,7 +74,7 @@ Parse review scores.
 review = Raev.url("http://www.gamesradar.com/superhot-review/")
 review.ratingValue
 # => 4.5
-review.review.bestRating
+review.bestRating
 # => 5.0
 ```
 
