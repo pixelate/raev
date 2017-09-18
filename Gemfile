@@ -9,6 +9,6 @@ gem "chronic", ">=0.10.2"
 group :development do
   gem "shoulda", ">= 0"
   gem "bundler", "~> 1.14.6"
-  gem "jeweler", "2.1.1"
-  gem "test-unit", "~> 2.5.4"
+  gem "jeweler", "2.3.7"
+  gem "test-unit", "3.2.4"
 end
