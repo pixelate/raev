@@ -34,7 +34,6 @@ module Raev
     
     attr_reader :url
     attr_reader :doc
-    attr_reader :linked_data
   
     def initialize(url)
       @url = url
