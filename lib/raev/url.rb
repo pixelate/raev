@@ -5,6 +5,28 @@ require "sanitize"
 module Raev
   
   class Url
+
+    AUTHOR_CSS_SELECTORS = [
+      '.c-byline__item a'.freeze,
+      '.author-info .name'.freeze,
+      '.author-top a'.freeze,
+			'.yt-user-info a'.freeze,
+      'a[rel~="author"]'.freeze,
+      'a[itemprop~="author"]'.freeze,
+      '.author h3 a'.freeze,
+      '.author'.freeze,
+      '.posted-by a'.freeze,
+      '.entryAuthor a'.freeze,
+      'a.names'.freeze,
+      'a.byline-author'.freeze,
+      '.byline a'.freeze,
+      '.author.vcard a'.freeze,
+      'p.info a'.freeze,
+      '.author-name'.freeze,
+      '.upcased'.freeze,
+      'a[rel~="nofollow"]'.freeze
+    ]
+    
     attr_reader :url
     attr_reader :doc
     attr_reader :linked_data
@@ -157,28 +179,7 @@ module Raev
 				return node.attribute("content".freeze).value
 			end
 			
-      cssSelectors = [
-        '.c-byline__item a'.freeze,
-        '.author-info .name'.freeze,
-        '.author-top a'.freeze,
-				'.yt-user-info a'.freeze,
-        'a[rel~="author"]'.freeze,
-        'a[itemprop~="author"]'.freeze,
-        '.author h3 a'.freeze,
-        '.author'.freeze,
-        '.posted-by a'.freeze,
-        '.entryAuthor a'.freeze,
-        'a.names'.freeze,
-        'a.byline-author'.freeze,
-        '.byline a'.freeze,
-        '.author.vcard a'.freeze,
-        'p.info a'.freeze,
-        '.author-name'.freeze,
-        '.upcased'.freeze,
-        'a[rel~="nofollow"]'.freeze
-      ]
-
-      node = document.search(cssSelectors.join(", ".freeze)).first
+      node = document.search(AUTHOR_CSS_SELECTORS.join(", ".freeze)).first
       
       if node
         words = node.content.split.size

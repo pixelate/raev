@@ -2,6 +2,13 @@ module Raev
   
   class Author  
 
+    NO_AUTHOR_STRINGS = [
+      "admin".freeze,
+      "blogs".freeze,
+      "editor".freeze,
+      "staff".freeze
+    ]
+
     def self.normalize_name author_name
       if author_name.nil?
         return nil
@@ -12,10 +19,8 @@ module Raev
           return nil
         end
         
-        # Ignore common strings that are not names of people
-        no_authors = ["admin".freeze, "blogs".freeze, "editor".freeze, "staff".freeze]
-        
-        if no_authors.include?(author.downcase)
+        # Ignore common strings that are not names of people        
+        if NO_AUTHOR_STRINGS.include?(author.downcase)
           return nil
         end
       end
