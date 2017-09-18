@@ -2,9 +2,11 @@ module Raev
   
   class Article  
 
+    REGEX_NODE_EMPTY = /\A *\z/
+
     attr_reader :body
     attr_reader :doc
-  
+    
     def initialize(body)
       body = replace_non_breaking_space(body)
       
@@ -60,7 +62,7 @@ module Raev
     end
 
     def node_empty?(node)
-      node.element_children.empty? && /\A *\z/.match(node.inner_text)
+      node.element_children.empty? && REGEX_NODE_EMPTY.match(node.inner_text)
     end
 
   end

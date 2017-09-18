@@ -8,6 +8,10 @@ module Raev
       "editor".freeze,
       "staff".freeze
     ]
+    
+    REGEX_EMAIL_WITH_NAME = /\((.*)\)/
+    REGEX_QUOTES = /\'(.*)\'/
+    REGEX_DOUBLE_QUOTES = /\"(.*)\"/
 
     def self.normalize_name author_name
       if author_name.nil?
@@ -26,13 +30,13 @@ module Raev
       end
             
       # Parse notation "andreas@somedomain.com (Andreas)"
-      m = /\((.*)\)/.match(author)
+      m = REGEX_EMAIL_WITH_NAME.match(author)
       unless m.nil?
         author = m[1]
       end
 
       # Remove nickname quotes
-      author = author.gsub(/\"(.*)\"/, "".freeze).gsub(/\'(.*)\'/, "".freeze).gsub("  ".freeze, " ".freeze)
+      author = author.gsub(REGEX_DOUBLE_QUOTES, "".freeze).gsub(REGEX_QUOTES, "".freeze).gsub("  ".freeze, " ".freeze)
 
 			# Remove "by"
 			author = author.gsub("by ".freeze, "".freeze)

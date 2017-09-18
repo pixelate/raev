@@ -27,6 +27,11 @@ module Raev
       'a[rel~="nofollow"]'.freeze
     ]
     
+    REGEX_UTM = /(\?|&)utm_/
+    REGEX_URL_DATE = /[0-9]{4}\/[0-9]{1,2}\/[0-9]{1,2}/
+    REGEX_ENTRY_DATE = /[^a-zA-Z0-9\s]/
+    REGEX_PAGE_TITLE = / +/
+    
     attr_reader :url
     attr_reader :doc
     attr_reader :linked_data
@@ -45,7 +50,7 @@ module Raev
     
     def clean
       unless @url.nil?
-        utm_index = @url.index(/(\?|&)utm_/)
+        utm_index = @url.index(REGEX_UTM)
         unless(utm_index.nil?)
           return url.slice(0, utm_index)
         end
@@ -140,7 +145,7 @@ module Raev
       end
       
       unless page_title.nil?
-        page_title.gsub!(/ +/, ' '.freeze)
+        page_title.gsub!(REGEX_PAGE_TITLE, ' '.freeze)
       end
       
       page_title
@@ -151,7 +156,7 @@ module Raev
         return Date.parse(linked_data["datePublished"])
       end
       
-      date_elements = @url.match(/[0-9]{4}\/[0-9]{1,2}\/[0-9]{1,2}/).to_s.split("/".freeze)
+      date_elements = @url.match(REGEX_URL_DATE).to_s.split("/".freeze)
       
       if date_elements.size == 3
         return Date.new(date_elements[0].to_i, date_elements[1].to_i, date_elements[2].to_i)      
@@ -164,7 +169,7 @@ module Raev
           node = document.search(".entryDate, .entrydate".freeze).first
 
           if node
-            return Chronic.parse(node.content.gsub(/[^a-zA-Z0-9\s]/,"".freeze).strip)
+            return Chronic.parse(node.content.gsub(REGEX_ENTRY_DATE,"".freeze).strip)
           end
         end
       end
