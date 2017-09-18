@@ -16,8 +16,8 @@ module Raev
     end
 
     def base      
-      base_url = @url.split('/')[2]  
-      base_url = base_url.gsub('www.', '') unless base_url.nil?
+      base_url = @url.split('/'.freeze)[2]  
+      base_url.gsub!('www.'.freeze, ''.freeze) unless base_url.nil?
       base_url
     end
     
@@ -50,15 +50,15 @@ module Raev
     end
 
     def without_http
-      @url.sub("http://", "")
+      @url.sub("http://".freeze, "".freeze)
     end
     
     def twitter
-      node = document.css('a:match_href("twitter.com")', Raev::Parser.new)
+      node = document.css('a:match_href("twitter.com")'.freeze, Raev::Parser.new)
             
       if node.first
         twitter_url = node.first["href"]
-        twitter_url.split('/').last
+        twitter_url.split('/'.freeze).last
       else
         nil
       end
@@ -67,19 +67,19 @@ module Raev
     def feed
       feed_url = nil
       
-      node = document.css('link[type="application/rss+xml"][rel="alternate"]')
+      node = document.css('link[type="application/rss+xml"][rel="alternate"]'.freeze)
       
       if node.first
         feed_url = node.first["href"]
       else
-        node = document.css('a:match_href("http://feeds.")', Raev::Parser.new)
+        node = document.css('a:match_href("http://feeds.")'.freeze, Raev::Parser.new)
                 
         if node.first
           feed_url = node.first["href"]
         end
       end
       
-      if feed_url && feed_url[0,1] == "/"
+      if feed_url && feed_url[0,1] == "/".freeze
         feed_url = @url + feed_url
       end
       
@@ -93,7 +93,7 @@ module Raev
       
       page_title = nil
       
-      node = document.css(".twitter-share-button")
+      node = document.css(".twitter-share-button".freeze)
       
       if node.first
         if node.first['data-text']
@@ -102,15 +102,15 @@ module Raev
       end
 
       if page_title.nil?
-        document.css("head meta").each do |meta|
-          if meta['property'] == 'og:title' || meta['property'] == 'twitter:title'
+        document.css("head meta".freeze).each do |meta|
+          if meta['property'] == 'og:title'.freeze || meta['property'] == 'twitter:title'.freeze
             page_title = meta['content']
           end
         end
       end
             
       if page_title.nil?
-        node = document.css("#article h1, a[rel=\"bookmark\"], h2[itemprop=\"name\"]")
+        node = document.css("#article h1, a[rel=\"bookmark\"], h2[itemprop=\"name\"]".freeze)
                 
         if node.first
           page_title = node.first.content
@@ -118,7 +118,7 @@ module Raev
       end
       
       unless page_title.nil?
-        page_title.gsub!(/ +/, ' ')
+        page_title.gsub!(/ +/, ' '.freeze)
       end
       
       page_title
@@ -129,20 +129,20 @@ module Raev
         return Date.parse(linked_data["datePublished"])
       end
       
-      date_elements = @url.match(/[0-9]{4}\/[0-9]{1,2}\/[0-9]{1,2}/).to_s.split("/")
+      date_elements = @url.match(/[0-9]{4}\/[0-9]{1,2}\/[0-9]{1,2}/).to_s.split("/".freeze)
       
       if date_elements.size == 3
         return Date.new(date_elements[0].to_i, date_elements[1].to_i, date_elements[2].to_i)      
       else
-        node = document.search("meta[itemprop='datePublished'], meta[name='pub_date']").first
+        node = document.search("meta[itemprop='datePublished'], meta[name='pub_date']".freeze).first
         
         if node
-          return Date.parse(node.attribute("content"))
+          return Date.parse(node.attribute("content".freeze))
         else
-          node = document.search(".entryDate, .entrydate").first
+          node = document.search(".entryDate, .entrydate".freeze).first
 
           if node
-            return Chronic.parse(node.content.gsub(/[^a-zA-Z0-9\s]/,"").strip)
+            return Chronic.parse(node.content.gsub(/[^a-zA-Z0-9\s]/,"".freeze).strip)
           end
         end
       end
@@ -151,33 +151,34 @@ module Raev
     end
     
     def author
-			node = document.search('meta[name="author"]').first
+			node = document.search('meta[name="author"]'.freeze).first
 
-			if node && node.attribute("content")
-				return node.attribute("content").value
+			if node && node.attribute("content".freeze)
+				return node.attribute("content".freeze).value
 			end
 			
       cssSelectors = [
-        '.author-info .name',
-        '.author-top a',
-				'.yt-user-info a',
-        'a[rel~="author"]',
-        'a[itemprop~="author"]',
-        '.author h3 a',
-        '.author',
-        '.posted-by a',
-        '.entryAuthor a',
-        'a.names',
-        'a.byline-author',
-        '.byline a',
-        '.author.vcard a',
-        'p.info a',
-        '.author-name',
-        '.upcased',
-        'a[rel~="nofollow"]'
+        '.c-byline__item a'.freeze,
+        '.author-info .name'.freeze,
+        '.author-top a'.freeze,
+				'.yt-user-info a'.freeze,
+        'a[rel~="author"]'.freeze,
+        'a[itemprop~="author"]'.freeze,
+        '.author h3 a'.freeze,
+        '.author'.freeze,
+        '.posted-by a'.freeze,
+        '.entryAuthor a'.freeze,
+        'a.names'.freeze,
+        'a.byline-author'.freeze,
+        '.byline a'.freeze,
+        '.author.vcard a'.freeze,
+        'p.info a'.freeze,
+        '.author-name'.freeze,
+        '.upcased'.freeze,
+        'a[rel~="nofollow"]'.freeze
       ]
 
-      node = document.search(cssSelectors.join(", ")).first
+      node = document.search(cssSelectors.join(", ".freeze)).first
       
       if node
         words = node.content.split.size
@@ -187,15 +188,15 @@ module Raev
         end
       end
       
-      ""
+      "".freeze
     end
 		
 		def ratingValue
-			node = document.search('*[itemprop="ratingValue"]').first
+			node = document.search('*[itemprop="ratingValue"]'.freeze).first
 			
 			if node
-				if node.attribute("content")
-					value = node.attribute("content").value
+				if node.attribute("content".freeze)
+					value = node.attribute("content".freeze).value
 				else
 					value = node.content
 				end
@@ -209,11 +210,11 @@ module Raev
 		end
 		
 		def bestRating
-			node = document.search('*[itemprop="bestRating"]').first
+			node = document.search('*[itemprop="bestRating"]'.freeze).first
 			
 			if node
-				if node.attribute("content")
-					value = node.attribute("content").value
+				if node.attribute("content".freeze)
+					value = node.attribute("content".freeze).value
 				
 					if value
 						return value.to_f
@@ -236,7 +237,7 @@ module Raev
     
     def linked_data
       if @linked_data.nil?
-        node = document.css("script[type=\"application/ld+json\"]")
+        node = document.css("script[type=\"application/ld+json\"]".freeze)
       
         if node.first
           @linked_data = JSON.parse(node.first.content)

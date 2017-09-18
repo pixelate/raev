@@ -13,7 +13,7 @@ module Raev
         end
         
         # Ignore common strings that are not names of people
-        no_authors = ["admin", "blogs", "editor", "staff"]
+        no_authors = ["admin".freeze, "blogs".freeze, "editor".freeze, "staff".freeze]
         
         if no_authors.include?(author.downcase)
           return nil
@@ -27,13 +27,13 @@ module Raev
       end
 
       # Remove nickname quotes
-      author = author.gsub(/\"(.*)\"/, "").gsub(/\'(.*)\'/, "").gsub("  ", " ")
+      author = author.gsub(/\"(.*)\"/, "".freeze).gsub(/\'(.*)\'/, "".freeze).gsub("  ".freeze, " ".freeze)
 
 			# Remove "by"
-			author = author.gsub("by ", "")
+			author = author.gsub("by ".freeze, "".freeze)
 
       # Capitalize
-      return author.split(' ').map(&:capitalize).join(' ')
+      return author.split(' '.freeze).map(&:capitalize).join(' '.freeze)
     end
 
   end
