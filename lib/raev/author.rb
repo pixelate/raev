@@ -34,12 +34,14 @@ module Raev
       unless m.nil?
         author = m[1]
       end
-
+      
       # Remove nickname quotes
-      author = author.gsub(REGEX_DOUBLE_QUOTES, "".freeze).gsub(REGEX_QUOTES, "".freeze).gsub("  ".freeze, " ".freeze)
+      author.gsub!(REGEX_DOUBLE_QUOTES, "".freeze)
+      author.gsub!(REGEX_QUOTES, "".freeze)
+      author.gsub!("  ".freeze, " ".freeze)
 
 			# Remove "by"
-			author = author.gsub("by ".freeze, "".freeze)
+			author.gsub!("by ".freeze, "".freeze)
 
       # Capitalize
       return author.split(' '.freeze).map(&:capitalize).join(' '.freeze)

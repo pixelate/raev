@@ -169,7 +169,7 @@ module Raev
           node = document.search(".entryDate, .entrydate".freeze).first
 
           if node
-            return Chronic.parse(node.content.gsub(REGEX_ENTRY_DATE,"".freeze).strip)
+            return Chronic.parse(node.content.gsub(REGEX_ENTRY_DATE, "".freeze).strip)
           end
         end
       end

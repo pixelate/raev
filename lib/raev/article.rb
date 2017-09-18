@@ -8,13 +8,13 @@ module Raev
     attr_reader :doc
     
     def initialize(body)
-      body = replace_non_breaking_space(body)
+      @doc = Nokogiri::HTML::DocumentFragment.parse(
+        replace_non_breaking_space(body)
+      )
       
-      @doc = Nokogiri::HTML::DocumentFragment.parse(body)
-      
-      @doc = replace_divs_with_paragraphs(@doc)
-      @doc = remove_empty_paragraphs(@doc)
-      @doc = remove_extra_linebreaks(@doc)
+      replace_divs_with_paragraphs(@doc)
+      remove_empty_paragraphs(@doc)
+      remove_extra_linebreaks(@doc)
 
       @body = @doc.to_s.gsub("\n".freeze, "".freeze)
     end
@@ -31,8 +31,6 @@ module Raev
           node.name = "p".freeze
         end
       end
-      
-      doc
     end
     
     def remove_empty_paragraphs(doc)
@@ -41,8 +39,6 @@ module Raev
           node.remove
         end
       end
-      
-      doc
     end
     
     def remove_extra_linebreaks(doc)
@@ -57,8 +53,6 @@ module Raev
           node.remove
         end
       end
-
-      doc
     end
 
     def node_empty?(node)
