@@ -60,7 +60,6 @@ GEM
     rack (2.0.3)
     rake (12.1.0)
     rdoc (5.1.0)
-    redirect_follower (0.1.1)
     sanitize (4.5.0)
       crass (~> 1.0.2)
       nokogiri (>= 1.4.4)
@@ -87,7 +86,6 @@ DEPENDENCIES
   jeweler (= 2.3.7)
   json (>= 2.1.0)
   nokogiri (>= 1.8.0)
-  redirect_follower (>= 0.1.1)
   sanitize (>= 2.1.0)
   shoulda
   test-unit (= 3.2.4)

@@ -5,29 +5,20 @@ require 'raev'
 
 class UrlTest < Test::Unit::TestCase
   should "parse base url" do
-    url = Raev.url("http://indiegames.com/2011/05/c418_minecraft_volume_alpha.html")
-    assert_equal url.base, "indiegames.com"
+    assert_equal Raev::Url.base("http://indiegames.com/2011/05/c418_minecraft_volume_alpha.html"), "indiegames.com"
   end
   
   should "clean url" do
-    url = Raev.url("http://ipodtouchlab.com/2011/01/iphone-ipad-app-sale-20110117.html?utm_campaign=touch_lab_bot&utm_medium=twitter&utm_source=am6_feedtweet")
-    assert_equal "http://ipodtouchlab.com/2011/01/iphone-ipad-app-sale-20110117.html", url.clean
-    
-    url = Raev.url("http://games.ign.com/articles/117/1178937p1.html?RSSwhen2011-06-24_082700&RSSid=1178937&utm_source=feedburner&utm_medium=feed&utm_campaign=Feed%3A+ignfeeds%2Fgames+%28IGN+Videogames%29")
-    assert_equal "http://games.ign.com/articles/117/1178937p1.html?RSSwhen2011-06-24_082700&RSSid=1178937", url.clean 
-    
-    url = Raev.url("http://boingboing.net/2011/08/09/ea-tried-to-buy-minecraft-studio.html")
-    assert_equal "http://boingboing.net/2011/08/09/ea-tried-to-buy-minecraft-studio.html", url.clean
+    cleaned_url = Raev::Url.remove_utm("http://www.ign.com/articles/2011/06/24/new-controllers-for-the-disabled-debuts-and-promises-change?utm_source=feedburner&utm_medium=feed&utm_campaign=Feed%3A+ignfeeds%2Fgames+%28IGN+Videogames%29")
+    assert_equal "http://www.ign.com/articles/2011/06/24/new-controllers-for-the-disabled-debuts-and-promises-change", cleaned_url
   end  
-  
-  should "resolve url" do
+    
+  should "resolve url" do 
     url = Raev.url("http://feedproxy.google.com/~r/fingergaming/~3/nBkNwBLq-U8/")
-    assert_equal "https://www.gamasutra.com/topic/smartphone-tablet/fg/2011/01/21/zynga-acquires-drop7-developer-areacode/?utm_source=feedburner&utm_medium=feed&utm_campaign=Feed%3A+fingergaming+%28FingerGaming%29", url.resolved
-  end
-  
-  should "resolve and clean url" do 
-    url = Raev.url("http://feedproxy.google.com/~r/fingergaming/~3/nBkNwBLq-U8/")
-    assert_equal "https://www.gamasutra.com/topic/smartphone-tablet/fg/2011/01/21/zynga-acquires-drop7-developer-areacode/", url.resolved_and_clean    
+    assert_equal "https://www.gamasutra.com/topic/smartphone-tablet/fg/2011/01/21/zynga-acquires-drop7-developer-areacode/", url.url    
+
+    url = Raev.url("http://boingboing.net/2011/08/09/ea-tried-to-buy-minecraft-studio.html")
+    assert_equal "https://boingboing.net/2011/08/09/ea-tried-to-buy-minecraft-studio.html", url.url
   end
   
   should "get twitter handle" do
@@ -36,8 +27,8 @@ class UrlTest < Test::Unit::TestCase
   end
   
   should "get rss feed" do
-    url = Raev.url("http://www.polygon.com")
-    assert_equal "http://www.polygon.com/rss/index.xml", url.feed
+    url = Raev.url("https://www.polygon.com")
+    assert_equal "https://www.polygon.com/rss/index.xml", url.feed
     
     url = Raev.url("http://arstechnica.com")
     assert_equal "http://feeds.arstechnica.com/arstechnica/index/", url.feed

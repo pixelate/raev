@@ -1,6 +1,7 @@
 require "chronic"
 require "json"
 require "sanitize"
+require 'net/http'
 
 module Raev
   
@@ -33,48 +34,33 @@ module Raev
     REGEX_PAGE_TITLE = / +/
     
     attr_reader :url
+    attr_reader :body
     attr_reader :doc
   
     def initialize(url)
-      @url = url
+      fetch(url)
+      @url = Url.remove_utm(@url)
       @doc = nil
       @linked_data = nil
     end
 
-    def base      
-      base_url = @url.split('/'.freeze)[2]  
+    def self.base(url)
+      base_url = url.split('/'.freeze)[2]  
       base_url.gsub!('www.'.freeze, ''.freeze) unless base_url.nil?
       base_url
     end
     
-    def clean
-      unless @url.nil?
-        utm_index = @url.index(REGEX_UTM)
+    def self.remove_utm(url)
+      unless url.nil?
+        utm_index = url.index(REGEX_UTM)
         unless(utm_index.nil?)
-          return url.slice(0, utm_index)
+          url = url.slice(0, utm_index)
         end
       end
       
-      @url
+      url
     end
     
-    def resolved
-      unless @url.nil?
-        begin
-          return RedirectFollower(@url, 5)
-        rescue => ex
-          puts "Could not resolve #{@url}. #{ex.class}: #{ex.message}"
-        end
-      end
-
-      @url
-    end
-    
-    def resolved_and_clean
-      resolved_url = Url.new(self.resolved)
-      resolved_url.clean      
-    end
-
     def without_http
       @url.sub("http://".freeze, "".freeze)
     end
@@ -232,7 +218,7 @@ module Raev
 
     def document
       if @doc.nil?
-        @doc = Nokogiri::HTML(open(@url))
+        @doc = Nokogiri::HTML(@body)
       end
 
       @doc
@@ -252,5 +238,20 @@ module Raev
       @linked_data
     end
     
+    def fetch(uri_str, limit = 10)
+      raise ArgumentError, 'too many HTTP redirects' if limit == 0
+
+      response = Net::HTTP.get_response(URI(uri_str))
+
+      case response
+      when Net::HTTPSuccess then
+        @url = uri_str
+        @body = response.body
+      when Net::HTTPRedirection then
+        fetch(response['location'], limit - 1)
+      else
+        # TODO handle Not Found
+      end
+    end
   end
 end

@@ -22,29 +22,22 @@ Usage
 Get the domain name from an url without the `www.` subdomain.
 
 ```ruby
-Raev.url("http://indiegames.com/2011/05/c418_minecraft_volume_alpha.html").base
+Raev::Url.base("http://indiegames.com/2011/05/c418_minecraft_volume_alpha.html")
 # => "indiegames.com"
 ```
 
 Remove UTM analytics parameters from an url.
 
 ```ruby
-Raev.url("http://ipodtouchlab.com/2011/01/iphone-ipad-app-sale-20110117.html?utm_campaign=touch_lab_bot&utm_medium=twitter&utm_source=am6_feedtweet").clean
-# =>  "http://ipodtouchlab.com/2011/01/iphone-ipad-app-sale-20110117.html"
+Raev::Url.remove_utm("http://www.ign.com/articles/2011/06/24/new-controllers-for-the-disabled-debuts-and-promises-change&utm_source=feedburner&utm_medium=feed&utm_campaign=Feed%3A+ignfeeds%2Fgames+%28IGN+Videogames%29")
+# =>  "http://www.ign.com/articles/2011/06/24/new-controllers-for-the-disabled-debuts-and-promises-change"
 ```
 
 Resolve a shortened or proxied url.
 
 ```ruby
-Raev.url("http://sbn.to/WRgXfl").resolved
+Raev.url("http://sbn.to/WRgXfl").url
 # => "http://www.polygon.com/features/2013/3/25/4128022/gdc-gathering-of-game-makers"
-```
-
-Resolve a shortend or proxied url and remove UTM analytics parameters.
-
-```ruby
-url = Raev.url("http://feedproxy.google.com/~r/fingergaming/~3/nBkNwBLq-U8/").resolved_and_clean 
-# => "http://www.gamasutra.com/topic/smartphone-tablet/fg/2011/01/21/zynga-acquires-drop7-developer-areacode/"   
 ```
 
 Fetch Twitter handle from url.

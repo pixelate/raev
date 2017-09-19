@@ -1,7 +1,4 @@
 require 'nokogiri'
-require 'redirect_follower'
-require 'open-uri'
-
 require 'raev/article'
 require 'raev/author'
 require 'raev/parser'
