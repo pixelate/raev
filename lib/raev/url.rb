@@ -38,6 +38,7 @@ module Raev
     attr_reader :doc
   
     def initialize(url)
+      @body = ""
       fetch(url)
       @url = Url.remove_utm(@url)
       @doc = nil
@@ -241,11 +242,12 @@ module Raev
     def fetch(uri_str, limit = 10)
       raise ArgumentError, 'too many HTTP redirects' if limit == 0
 
+      @url = uri_str unless uri_str.nil?
+      
       response = Net::HTTP.get_response(URI(uri_str))
 
       case response
       when Net::HTTPSuccess then
-        @url = uri_str
         @body = response.body
       when Net::HTTPRedirection then
         fetch(response['location'], limit - 1)
